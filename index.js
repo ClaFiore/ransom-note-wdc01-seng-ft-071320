@@ -6,9 +6,16 @@ let ransomNote = "hereisat"
     
 function canBuildNote(ransomNote, magazine) {
     let magazine = magazine.replace(/\s/g,'').toLowerCase().split("")  //magazine is now an array, without spaces, only lowercase letters
+    let ransomNote = ransomNote.replace(/\s/g,'').toLowerCase().split("") //same for the note
+    if (ransomNote.length > magazine.length){   //eliminate edge case where there aren't enough letters in the magazine
+        return false}
+
     const buildHistogram = {}
+
+    //for(let char of magazine){
+    //  char in buildHistogram ? buildhistogram[char] += 1 : buildHistogram[char] = 1
     for (let char of magazine){
-        if (buildHistogram[char] > 0){
+        if (buildHistogram[char] > 0){   //could build this also with ternary operator
             buildHistogram[char]++
         }else{
             buildHistogram[char] = 1
