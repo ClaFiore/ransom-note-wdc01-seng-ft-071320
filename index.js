@@ -5,6 +5,7 @@ let ransomNote = "hereisat"
     
     
 function canBuildNote(ransomNote, magazine) {
+    let magazine = magazine.replace(/\s/g,'').toLowerCase().split("")  //magazine is now an array, without spaces, only lowercase letters
     const buildHistogram = {}
     for (let char of magazine){
         if (buildHistogram[char] > 0){
@@ -21,4 +22,28 @@ function canBuildNote(ransomNote, magazine) {
         }
     }
     return true
+}
+
+
+
+
+let canMakeNote = (source, note) => {
+    let boolean = false
+
+    let cleanedSource = clean(source)
+    let cleanedNote = clean(note)
+
+    if (cleanedSource.length >= cleanedNote.length){
+        let sourceHistogram = makeHistogram(source)
+        let noteHistogram = makeHistogram(cleanedNote)
+        for(let letter in noteHistogram){
+            if (sourceHistogram[letter] && sourceHistogram[letter] >= noteHistogram[letter]){
+                boolean = true
+            }else{
+                boolean = false 
+                break
+            }
+        }
+    }
+    return boolean
 }
